@@ -100,7 +100,7 @@ const BarChart = ({ records }: { records: ExpenseRecord[] }) =>
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: true,
+        display: false,
         labels: { color: isDark ? '#e5e7eb' : '#374151' },
       },
       title: { display: false },
@@ -167,7 +167,7 @@ const BarChart = ({ records }: { records: ExpenseRecord[] }) =>
   };
 
   return (
-    <div className="relative w-full h-64 sm:h-72 md:h-80">
+    <div className="relative w-full  h-56 sm:h-64 md:h-68">
       <Bar data={data} options={options} />
     </div>
   );

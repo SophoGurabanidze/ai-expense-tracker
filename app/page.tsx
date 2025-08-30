@@ -97,7 +97,7 @@ export default async function HomePage() {
         </div>
 
         {/* Full-width sections below - mobile-friendly spacing */}
-        <div className='mt-6 sm:mt-8 space-y-4 sm:space-y-6'>
+        <div className='mt-6 sm:mt-8 space-y-4 sm:space-y-8'>
           <AIInsights />
           <RecordHistory />
         </div>
