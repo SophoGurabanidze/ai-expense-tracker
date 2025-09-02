@@ -7,15 +7,20 @@ interface RawInsight {
   action?: string;
   confidence?: number;
 }
+const referer =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'https://ai-expense-tracker-swart.vercel.app/';
 
-const openai = new OpenAI({
-  baseURL: 'https://openrouter.ai/api/v1',
-  apiKey: process.env.OPENROUTER_API_KEY || process.env.OPENAI_API_KEY,
-  defaultHeaders: {
-    'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-    'X-Title': 'ExpenseTracker AI',
-  },
-});
+
+    const openai = new OpenAI({
+      baseURL: 'https://openrouter.ai/api/v1',
+      apiKey: process.env.OPENROUTER_API_KEY || process.env.OPENAI_API_KEY,
+      defaultHeaders: {
+        'HTTP-Referer': referer,
+        'X-Title': 'ExpenseTracker AI',
+      },
+    });
 
 export interface ExpenseRecord {
   id: string;
@@ -68,7 +73,7 @@ export async function generateExpenseInsights(
     Return only valid JSON array, no additional text.`;
 
     const completion = await openai.chat.completions.create({
-      model: 'deepseek/deepseek-chat-v3-0324:free',
+      model: "openai/gpt-4o-mini",
       messages: [
         {
           role: 'system',
@@ -138,7 +143,7 @@ export async function generateExpenseInsights(
 export async function categorizeExpense(description: string): Promise<string> {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'deepseek/deepseek-chat-v3-0324:free',
+      model: "openai/gpt-4o-mini",
       messages: [
         {
           role: 'system',
@@ -202,7 +207,7 @@ export async function generateAIAnswer(
     Return only the answer text, no additional formatting.`;
 
     const completion = await openai.chat.completions.create({
-      model: 'deepseek/deepseek-chat-v3-0324:free',
+      model: "openai/gpt-4o-mini",
       messages: [
         {
           role: 'system',
